@@ -89,6 +89,21 @@ public class CreditoService {
 	}
 	
 	
+	@Transactional
+	public Credito consultarCredito(Long id) throws Exception {
+		try {
+			Credito cred = creditoRepository.findById(id).orElse(null);
+			if(cred != null){
+				return cred;
+			}else {
+				throw new Exception("No existe el credito a consultar.");
+			}	
+		}catch(Exception e) {	
+			throw new Exception("Error al consultar el credito: " + e);
+		}	
+	}
+	
+	
 
 
 

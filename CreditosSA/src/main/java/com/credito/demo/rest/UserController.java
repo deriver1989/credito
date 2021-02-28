@@ -1,4 +1,4 @@
-package com.credito.demo.security;
+package com.credito.demo.rest;
 
 import java.util.Date;
 import java.util.List;
@@ -9,6 +9,8 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.credito.demo.security.User;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

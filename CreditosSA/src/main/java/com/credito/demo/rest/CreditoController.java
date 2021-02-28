@@ -6,7 +6,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,4 +62,39 @@ public class CreditoController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(list);
 	}
 
+	
+	@Operation(summary = "Modificar credito", description = "Modificar credito")
+	@ApiResponse(responseCode = "200", description = "Proceso realizado correctamente")
+	@ApiResponse(responseCode = "400", description = "Petición generada incorrectamente")
+	@ApiResponse(responseCode = "404", description = "No se identifica el recurso solicitado")
+	@ApiResponse(responseCode = "500", description = "Internal Error - No se puede procesar la petición solicitada")
+	@PutMapping("/modificar/{id}")
+    public ResponseEntity<Credito> modificarCredito( @Valid @RequestBody Credito credito, @PathVariable Long id ) throws Exception{
+		Credito cred = creditoService.editarCredito(credito, id);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(cred);
+	}
+	
+	
+	@Operation(summary = "Consultar un credito", description = "Consultar un credito")
+	@ApiResponse(responseCode = "200", description = "Credito consultado correctamente")
+	@ApiResponse(responseCode = "400", description = "Petición generada incorrectamente")
+	@ApiResponse(responseCode = "404", description = "No se identifica el recurso solicitado")
+	@ApiResponse(responseCode = "500", description = "Internal Error - No se puede procesar la petición solicitada")
+	@GetMapping("/consultarcredito/{id}")
+    public ResponseEntity<Credito> consultarCredito( @PathVariable Long id) throws Exception{
+		Credito credito = creditoService.consultarCredito(id);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(credito);
+	}
+	
+	
+	@Operation(summary = "Eliminar un credito", description = "Eliminar un credito")
+	@ApiResponse(responseCode = "200", description = "Credito consultado correctamente")
+	@ApiResponse(responseCode = "400", description = "Petición generada incorrectamente")
+	@ApiResponse(responseCode = "404", description = "No se identifica el recurso solicitado")
+	@ApiResponse(responseCode = "500", description = "Internal Error - No se puede procesar la petición solicitada")
+	@GetMapping("/eliminarcredito/{id}")
+    public ResponseEntity<Credito> eliminarCredito( @PathVariable Long id) throws Exception{
+		Credito credito = creditoService.eliminarCredito(id);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(credito);
+	}
 }
