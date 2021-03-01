@@ -58,6 +58,7 @@ public class CreditoService {
 		try {
 			Credito cred = creditoRepository.findById(id).orElse(null);
 			if(cred != null){
+				credito.setId(id);
 				return creditoRepository.save(credito);
 			}else {
 				log.error("No existe el credito a modificars.");
